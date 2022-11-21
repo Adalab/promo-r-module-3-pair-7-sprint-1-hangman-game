@@ -1,9 +1,8 @@
-import '../style/App.scss';
-import '../fonts/KgTenThousandReasons-R1ll.ttf';
+import '../styles/App.scss';
 
 function App() {
   return (
-    <div classNameName='page'>
+    <div className='page'>
       <header>
         <h1 className='header__title'>Juego del ahorcado</h1>
       </header>
@@ -39,9 +38,9 @@ function App() {
               Escribe una letra:
             </label>
             <input
-              autocomplete='off'
+              autoComplete='off'
               className='form__input'
-              maxlength='1'
+              maxLength='1'
               type='text'
               name='last-letter'
               id='last-letter'
