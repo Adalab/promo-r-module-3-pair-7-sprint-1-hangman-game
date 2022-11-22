@@ -1,10 +1,21 @@
 import '../styles/App.scss';
+import { useState } from 'react';
 
 function App() {
+  let [numberOfErrors, setNumberOfErrors] = useState(0);
+
+  const increment = () => {
+    numberOfErrors++;
+    setNumberOfErrors(numberOfErrors);
+  };
+
   return (
     <div className='page'>
       <header>
         <h1 className='header__title'>Juego del ahorcado</h1>
+        <button type='text' onClick={increment}>
+          Incrementar
+        </button>
       </header>
       <main className='main'>
         <section>
@@ -47,7 +58,7 @@ function App() {
             />
           </form>
         </section>
-        <section className='dummy error-5'>
+        <section className={`dummy error-${numberOfErrors}`}>
           <span className='error-13 eye'></span>
           <span className='error-12 eye'></span>
           <span className='error-11 line'></span>
