@@ -2,12 +2,31 @@ import '../styles/App.scss';
 import { useState } from 'react';
 
 function App() {
-  let [numberOfErrors, setNumberOfErrors] = useState(0);
+  //states
+  const [numberOfErrors, setNumberOfErrors] = useState(0);
+  const [lastLetter, setLastLetter] = useState('');
+  const [message, setMessage] = useState('');
+  //funciones sobre eventos
+
+
+  const addLetter = (event) => {
+    setLastLetter(event.target.value);
+    console.log(lastLetter);
+    const lastLetterIsAllowed = /^[a-zA-Z]+$/.exec(event.target.value);
+    console.log(lastLetterIsAllowed);
+    //(lastLetterIsAllowed === null) ? "añada una letra válida por favor" : x.push(lastLetterIsAllowed)
+    if(lastLetterIsAllowed === null) {
+      setMessage("Añada una letra válida por favor");
+    } else {
+      setLastLetter(event.target.value);
+    }
+
+  }
 
   const increment = () => {
-    numberOfErrors++;
-    setNumberOfErrors(numberOfErrors);
+    setNumberOfErrors(numberOfErrors + 1);
   };
+
 
   return (
     <div className='page'>
@@ -16,6 +35,7 @@ function App() {
         <button type='text' onClick={increment}>
           Incrementar
         </button>
+        <p>{message}</p>
       </header>
       <main className='main'>
         <section>
@@ -55,6 +75,8 @@ function App() {
               type='text'
               name='last-letter'
               id='last-letter'
+              value= {lastLetter}
+              onChange= {addLetter}
             />
           </form>
         </section>
