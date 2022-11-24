@@ -8,25 +8,22 @@ function App() {
   const [message, setMessage] = useState('');
   //funciones sobre eventos
 
-
   const addLetter = (event) => {
     setLastLetter(event.target.value);
     console.log(lastLetter);
     const lastLetterIsAllowed = /^[a-zA-Z]+$/.exec(event.target.value);
     console.log(lastLetterIsAllowed);
     //(lastLetterIsAllowed === null) ? "añada una letra válida por favor" : x.push(lastLetterIsAllowed)
-    if(lastLetterIsAllowed === null) {
-      setMessage("Añada una letra válida por favor");
+    if (lastLetterIsAllowed === null) {
+      setMessage('Añada una letra válida por favor');
     } else {
       setLastLetter(event.target.value);
     }
-
-  }
+  };
 
   const increment = () => {
     setNumberOfErrors(numberOfErrors + 1);
   };
-
 
   return (
     <div className='page'>
@@ -75,8 +72,8 @@ function App() {
               type='text'
               name='last-letter'
               id='last-letter'
-              value= {lastLetter}
-              onChange= {addLetter}
+              value={lastLetter}
+              onChange={addLetter}
             />
           </form>
         </section>
