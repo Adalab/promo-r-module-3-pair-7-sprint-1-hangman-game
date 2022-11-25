@@ -6,18 +6,19 @@ function App() {
   const [numberOfErrors, setNumberOfErrors] = useState(0);
   const [lastLetter, setLastLetter] = useState('');
   const [message, setMessage] = useState('');
-  //funciones sobre eventos
+  const [word, setWord] = useState('katakroker');
+  const [userLetters, setUserLetters] = useState([]);
 
-  const addLetter = (event) => {
-    setLastLetter(event.target.value);
-    console.log(lastLetter);
-    const lastLetterIsAllowed = /^[a-zA-Z]+$/.exec(event.target.value);
-    console.log(lastLetterIsAllowed);
-    //(lastLetterIsAllowed === null) ? "añada una letra válida por favor" : x.push(lastLetterIsAllowed)
-    if (lastLetterIsAllowed === null) {
-      setMessage('Añada una letra válida por favor');
-    } else {
+  //Handlers
+  const handleLastLetter = (event) => {
+    const regex = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü]{0,1}/;
+    if (regex.test(event.target.value)) {
       setLastLetter(event.target.value);
+      if (event.target.value !== '') {
+        setUserLetters([...userLetters, event.target.value]);
+      }
+    } else {
+      console.log('Escribe una letra que esté permitida');
     }
   };
 
@@ -25,6 +26,15 @@ function App() {
     setNumberOfErrors(numberOfErrors + 1);
   };
 
+  //Render Helpers
+  const renderSolutionsLetter = () => {
+    const wordLetters = word
+      .split('')
+      .map((eachLetter, i) => <li key={i} className='letter'></li>);
+    return wordLetters;
+  };
+
+  //Returny
   return (
     <div className='page'>
       <header>
@@ -38,18 +48,7 @@ function App() {
         <section>
           <div className='solution'>
             <h2 className='title'>Solución:</h2>
-            <ul className='letters'>
-              <li className='letter'>k</li>
-              <li className='letter'>a</li>
-              <li className='letter'></li>
-              <li className='letter'>a</li>
-              <li className='letter'>k</li>
-              <li className='letter'>r</li>
-              <li className='letter'></li>
-              <li className='letter'>k</li>
-              <li className='letter'>e</li>
-              <li className='letter'>r</li>
-            </ul>
+            <ul className='letters'>{renderSolutionsLetter()}</ul>
           </div>
           <div className='error'>
             <h2 className='title'>Letras falladas:</h2>
@@ -73,7 +72,7 @@ function App() {
               name='last-letter'
               id='last-letter'
               value={lastLetter}
-              onChange={addLetter}
+              onChange={handleLastLetter}
             />
           </form>
         </section>
