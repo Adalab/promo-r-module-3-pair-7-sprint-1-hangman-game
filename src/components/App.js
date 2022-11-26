@@ -17,7 +17,6 @@ function App() {
   }, [userLetters]);
 
   useEffect(() => {
-    console.log('trayendo api');
     callToApi()
       .then((data) => {
         setWord(data.word);
