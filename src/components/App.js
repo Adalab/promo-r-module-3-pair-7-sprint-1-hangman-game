@@ -6,7 +6,7 @@ function App() {
   //states
   const [numberOfErrors, setNumberOfErrors] = useState(0);
   const [lastLetter, setLastLetter] = useState('');
-  const [message, setMessage] = useState('');
+  // const [message, setMessage] = useState('');
   const [word, setWord] = useState('');
   const [userLetters, setUserLetters] = useState([]);
   console.log(word);
